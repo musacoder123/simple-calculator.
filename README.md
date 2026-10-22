@@ -1,6 +1,8 @@
-Simple Calculator
+Scientific Calculator Using Python
 
-A beginner-friendly calculator built using Python.
+About the Project
+
+This project is an upgraded version of a simple calculator developed using Python. It performs basic arithmetic operations as well as scientific calculations.
 
 Features
 
@@ -8,12 +10,19 @@ Features
 * Subtraction
 * Multiplication
 * Division
-* Handles division by zero
-* Detects invalid operators
+* Power calculations
+* Square root
+* Sine
+* Cosine
+* Tangent
+* Logarithm
+* Factorial
+* Error handling for invalid inputs and mathematical errors
 
 Technologies Used
 
-* Python 3
+* Python
+* Python math module
 * Git
 * GitHub
 
@@ -21,19 +30,13 @@ How to Run
 
 1. Install Python 3.
 2. Download or clone this repository.
-3. Open the project folder in Terminal.
-4. Run:
+3. Open a terminal in the project folder.
+4. Run the following command:
 
 python3 calculator.py
 
-Concepts Used
+5. Select an operation from the menu and follow the instructions.
 
-* Variables
-* User input
-* Conditional statements
-* Arithmetic operators
-* Basic error handling
+Purpose
 
-Author
-
-Musa Habib Hafiz
+This project demonstrates Python programming concepts, mathematical functions, error handling, version control, and GitHub collaboration workflows.
