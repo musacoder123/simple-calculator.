@@ -1,20 +1,80 @@
-# Simple Calculator
+# Scientific Calculator
 # Created using Python
-print("===== SIMPLE CALCULATOR =====")
-num1 = float(input("Enter first number: "))
-operator = input("Enter operator (+, -, *, /): ")
-num2 = float(input("Enter second number: "))
-if operator == "+":
-    result = num1 + num2
-elif operator == "-":
-    result = num1 - num2
-elif operator == "*":
-    result = num1 * num2
-elif operator == "/":
-    if num2 != 0:
-        result = num1 / num2
-    else:
-        result = "Error: Cannot divide by zero"
-else:
-    result = "Invalid operator"
-print("Result:", result)
+import math
+def calculator():
+    while True:
+        print("\n===== SCIENTIFIC CALCULATOR =====")
+        print("1. Addition (+)")
+        print("2. Subtraction (-)")
+        print("3. Multiplication (*)")
+        print("4. Division (/)")
+        print("5. Power (x^y)")
+        print("6. Square Root")
+        print("7. Sine (sin)")
+        print("8. Cosine (cos)")
+        print("9. Tangent (tan)")
+        print("10. Logarithm (log10)")
+        print("11. Factorial (!)")
+        print("0. Exit")
+        choice = input("Choose an operation: ")
+        if choice == "0":
+            print("Thank you for using the calculator!")
+            break
+        try:
+            if choice in ["1", "2", "3", "4", "5"]:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                if choice == "1":
+                    result = num1 + num2
+                elif choice == "2":
+                    result = num1 - num2
+                elif choice == "3":
+                    result = num1 * num2
+                elif choice == "4":
+                    if num2 == 0:
+                        print("Error: Cannot divide by zero.")
+                        continue
+                    result = num1 / num2
+                elif choice == "5":
+                    result = num1 ** num2
+            elif choice == "6":
+                num = float(input("Enter a number: "))
+                if num < 0:
+                    print("Error: Cannot calculate the square root of a negative number.")
+                    continue
+                result = math.sqrt(num)
+            elif choice in ["7", "8", "9"]:
+                angle = float(input("Enter angle in degrees: "))
+                radians = math.radians(angle)
+                if choice == "7":
+                    result = math.sin(radians)
+                elif choice == "8":
+                    result = math.cos(radians)
+                elif choice == "9":
+                    if math.isclose(math.cos(radians), 0.0, abs_tol=1e-12):
+                        print("Error: Tangent is undefined for this angle.")
+                        continue
+                    result = math.tan(radians)
+            elif choice == "10":
+                num = float(input("Enter a positive number: "))
+                if num <= 0:
+                    print("Error: Logarithm requires a positive number.")
+                    continue
+                result = math.log10(num)
+            elif choice == "11":
+                num = int(input("Enter a non-negative integer: "))
+                if num < 0:
+                    print("Error: Factorial is not defined for negative integers.")
+                    continue
+                result = math.factorial(num)
+            else:
+                print("Invalid choice. Please try again.")
+                continue
+            print("Result:", result)
+        except ValueError:
+            print("Error: Please enter a valid number.")
+        except OverflowError:
+            print("Error: The result is too large.")
+        except ZeroDivisionError:
+            print("Error: Cannot divide by zero.")
+calculator()
