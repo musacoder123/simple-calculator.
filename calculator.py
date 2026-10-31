@@ -4,6 +4,56 @@
 import math
 
 
+def input_matrix(rows, cols, name):
+    matrix = []
+    print(f"Enter values for Matrix {name}, row by row:")
+
+    for i in range(rows):
+        row = []
+        for j in range(cols):
+            value = float(
+                input(f"Enter value for row {i + 1}, column {j + 1}: ")
+            )
+            row.append(value)
+        matrix.append(row)
+
+    return matrix
+
+
+def add_matrices(a, b):
+    return [
+        [a[i][j] + b[i][j] for j in range(len(a[0]))]
+        for i in range(len(a))
+    ]
+
+
+def subtract_matrices(a, b):
+    return [
+        [a[i][j] - b[i][j] for j in range(len(a[0]))]
+        for i in range(len(a))
+    ]
+
+
+def multiply_matrices(a, b):
+    result = []
+
+    for i in range(len(a)):
+        row = []
+        for j in range(len(b[0])):
+            total = 0
+            for k in range(len(b)):
+                total += a[i][k] * b[k][j]
+            row.append(total)
+        result.append(row)
+
+    return result
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
+
 def calculator():
     history = []
 
@@ -21,6 +71,9 @@ def calculator():
         print("10. Logarithm (log10)")
         print("11. Factorial (!)")
         print("12. View Calculation History")
+        print("13. Matrix Addition")
+        print("14. Matrix Subtraction")
+        print("15. Matrix Multiplication")
         print("0. Exit")
 
         choice = input("Choose an operation: ").strip()
@@ -107,9 +160,7 @@ def calculator():
                     calculation = f"cos({angle}) = {result}"
 
                 elif choice == "9":
-                    if math.isclose(
-                        math.cos(radians), 0.0, abs_tol=1e-12
-                    ):
+                    if math.isclose(math.cos(radians), 0.0, abs_tol=1e-12):
                         print("Error: Tangent is undefined for this angle.")
                         continue
 
@@ -137,6 +188,39 @@ def calculator():
 
                 result = math.factorial(num)
                 calculation = f"{num}! = {result}"
+
+            # Matrix operations
+            elif choice in ["13", "14", "15"]:
+                rows_a = int(input("Enter rows for Matrix A: "))
+                cols_a = int(input("Enter columns for Matrix A: "))
+                rows_b = int(input("Enter rows for Matrix B: "))
+                cols_b = int(input("Enter columns for Matrix B: "))
+
+                # Check dimensions before asking for matrix values
+                if choice in ["13", "14"]:
+                    if rows_a != rows_b or cols_a != cols_b:
+                        print("Error: Matrices must have the same dimensions.")
+                        continue
+
+                elif choice == "15":
+                    if cols_a != rows_b:
+                        print("Error: Columns of A must equal rows of B.")
+                        continue
+
+                a = input_matrix(rows_a, cols_a, "A")
+                b = input_matrix(rows_b, cols_b, "B")
+
+                if choice == "13":
+                    result = add_matrices(a, b)
+                elif choice == "14":
+                    result = subtract_matrices(a, b)
+                else:
+                    result = multiply_matrices(a, b)
+
+                print("Result:")
+                print_matrix(result)
+                history.append(f"Matrix operation {choice}: {result}")
+                continue
 
             else:
                 print("Invalid choice. Please try again.")
